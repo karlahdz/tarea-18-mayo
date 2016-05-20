@@ -1,0 +1,41 @@
+install.packages("fpp")
+library(fpp)
+basea<-read.csv("C:\\Users\\Karla\\Downloads\\PIB-TRIMESTRAL-A-PRECIOS-DE-2008.csv", header = T)
+parta<-ts(basea[,2], start=1993, frequency=4)
+basea
+parta
+##lineal
+ajuste1<-holt(parta)
+ajuste1
+##exponencial
+ajuste2<-holt(parta,exponential = T)
+ajuste2
+##multiplicativo amortiguado
+ajuste3<-holt(parta,exponential = T, dumbed=T )
+##aditivo amortiguado
+ajuste4<-holt(parta, dumbed=T)
+plot(parta, xlab="Años", main="PIB en México")
+lines(fitted(ajuste1),col="yellow",type="o")
+lines(fitted(ajuste2),col="pink",type="o")
+lines(fitted(ajuste3),col="blue",type="o")
+lines(fitted(ajuste3),col="green",type="o")
+###base descendente
+based<-read.csv("C:\\Users\\Karla\\Downloads\\natalidad.csv", header = F)
+partd<-ts(based[,2], start=1960, frequency=1)
+based
+partd
+##lineal
+ajuste5<-holt(partd)
+ajuste5
+##exponencial
+ajuste6<-holt(partd,exponential = T)
+ajuste6
+##multiplicativo amortiguado
+ajuste7<-holt(partd,exponential = T, dumbed=T )
+##aditivo amortiguado
+ajuste8<-holt(partd, dumbed=T)
+plot(partd, xlab="Años", main="Tasa de natalidad en México a partir de 1960")
+lines(fitted(ajuste5),col="yellow",type="o")
+lines(fitted(ajuste6),col="pink",type="o")
+lines(fitted(ajuste7),col="blue",type="o")
+lines(fitted(ajuste8),col="green",type="o")
